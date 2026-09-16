@@ -76,9 +76,12 @@ function App() {
   const progress = totalTasks === 0 ? 0 : Math.round((completedCount / totalTasks) * 100);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-violet-100 via-purple-50 to-indigo-100">
+    <div className={`min-h-screen transition-colors duration-500 ${
+    darkMode ? "bg-gradient-to-br from-slate-950 via-purple-950 to-slate-900" : "bg-gradient-to-br from-violet-100 via-purple-50 to-indigo-100"}`}
+    >
       <div className="pointer-events-none absolute left-10 top-20 h-40 w-40 rounded-full bg-purple-300/20 blur-3xl"></div>
       <div className="pointer-events-none absolute bottom-20 right-10 h-48 w-48 rounded-full bg-indigo-300/20 blur-3xl"></div>
+      
       <div className="mx-auto max-w-3xl px-4 py-10">
         <div className="relative mb-10 text-center">
 
@@ -86,12 +89,24 @@ function App() {
             <span className="h-2 w-2 aniamte-pulse rounded-full bg-purple-500"></span>
             Stay focused • Get things done
           </div>
+          
+        <div className="mb=4 flex justify-end">
+          <button onClick={() =>
+            setDarkMode(!darkMode)}
+            className={`rounded-full border px-4 py-2 text-sm font-semibold shadow-md backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:scale-105 ${
+              darkMode ? "border-purpke-700/50 bg-slate-900/80 text-gray-200 shadow-purple-950/30 hover:bg-slate-800" : "border-white/60 bg-white/80 text-gray-700 shadow-purple-200/50 hover:bg-white"
+            }`}>
+              {darkMode ? "🔆Light" : "🌙 Dark"}
+            </button>
+        </div>
 
           <h1 className="bg-gradient-to-r from-purplr-600 via-indigo-600 to-blue-600 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-5xl">
             Smart Task Manager ✨
           </h1>
 
-          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-gray-500 sm:text-lg">
+          <p className={`mx-auto mt-4 max-w-xl text-base leading-relaxed transition-colors duration-500 sm:text-lg ${
+            darkMode ? "text-gray-400" : "text-gray-500"
+          }`}>
             Organize your day, prioritize what matters, and turn your
             <span className="font-semibold text-purple-600"> plans into progress.</span>
           </p>
@@ -100,22 +115,31 @@ function App() {
           <TaskInput
             title="Add a Task"
             onAddTask={handleAddTask}
+            darkMode={darkMode}
           />
         </div>
         <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
 
-          <div className="group rounded-2xl border border-white/40 bg-white/70 p-5 shadow-xl backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+          <div className={`group rounded-2xl border p-5 shadow-xl backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${
+            darkMode ? "border-slate-700/50 bg-slate-900/80" : "border-white/40 bg-white/70"}`}
+            >
             <div className="flex items-center justify-between">
               <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 text-xl shadow-lg shadow-purple-200">🗒️
               </div>
 
-              <span className="text-xs font-semibold uppercase tracking-wider text-gry-400">Overview</span>
+              <span className={`text-xs font-semibold uppercase tracking-wider ${
+                darkMode ? "text-gray-200" : "text-gray-400"
+              }`}>Overview</span>
             </div>
 
-            <p className="mt-5 text-sm font-medium text-gray-500">Total Tasks</p>
+            <p className={`mt-5 text-sm font-medium transition-colors duration-500 ${
+              darkMode ? "text-gray-300" : "text-gray-500"
+            }`}>Total Tasks</p>
 
             <div className="mt-1 flex items-end gap-2">
-              <p className="text-4xl font-extrabold tracking-tight text-gray-900">{totalTasks}</p>
+              <p className={`text-4xl font-extrabold tracking-tight transition-colors duration-500 ${
+                darkMode ? "text-white" : "text-gray-900"}`}
+                >{totalTasks}</p>
               <span className="mb-1 text-sm font-medium text-gray-400">tasks</span>
             </div>
 
@@ -124,17 +148,20 @@ function App() {
             </div>
           </div>
 
-          <div className="group rounded-2xl border border-white/40 bg-white/70 p-5 shadow-xl backdrop-blur-md transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl">
+          <div className={`group rounded-2xl border p-5 shadow-xl backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${
+            darkMode ? "border-slate-700/50 bg-slate-900/80" : "border-white/40 bg-white/70"}`}>
             <div className="flex items-center justify-between">
               <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-t0-br from-emerald-400 to-green-600 text-xl shadow-lg shadow-green-200">✅</div>
 
               <span className="text-xs font-semibold uppercase tracking-wider text-green-500">Success</span>
             </div>
 
-            <p className="mt-5 text-sm font-medium text-gray-500">Completed</p>
+            <p className={`mt-5 text-sm font-medium transition-colors duration-500 ${
+              darkMode ? "text-gray-300" : "text-gray-500"
+            }`}>Completed</p>
 
             <div className="mt-1 flex items-end gap-2">
-              <p className="text-4xl font-extrabold tracking-tight text-green-600">{completedCount}</p>
+              <p className="text-4xl font-extrabold tracking-tight text-green-400">{completedCount}</p>
 
               <span className="mb-1 text-sm font-medium text-gray-400">done</span>
             </div>
@@ -146,17 +173,22 @@ function App() {
           </div>
 
 
-          <div className="group rounded-2xl border border-white/40 bg-white/70 p-5 shadow-xl backdrop-blur-md transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl">
+          <div className={`group rounded-2xl border p-5 shadow-xl backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${
+            darkMode ? "border-slate-700/50 bg-slate-900/80" : "border-white/40 bg-white/70"}`}>
             <div className="flex items-center justify-between">
               <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 text-xl shadow-lg shadow-purple-200 ">⌛</div>
 
               <span className="text-xs font-semibold uppercase tracking-wider text-purple-500">In Progress</span>
             </div>
 
-            <p className="mt-5 text-sm font-medium text-gray-500">Pending</p>
+            <p className={`mt-5 text-sm font-medium transition-colors duration-500 ${
+              darkMode ? "text-gray-300" : "text-gray-500"
+            }`}>Pending</p>
 
             <div className="mt-1 flex items-end gap-2">
-              <p className="text-4xl font-extrabold tracking-tight text-purple-600">{pendingCount}</p>
+              <p className={`text-4xl font-extrabold tracking-tight transition-colors duration-500 ${
+                darkMode ? "text-purple-300" : "text-purple-600"
+              }`}>{pendingCount}</p>
 
               <span className="mt-1 text-sm font-medium text-gray-400">remaining</span>
             </div>
@@ -184,7 +216,9 @@ function App() {
               value={search}
               onChange={(event) => setSearch(event.target.value)}
               placeholder="Search your tasks.."
-              className="w-full rounded-2xl border border-white/40 bg-white/70 px-5 py-4 pl-5 text-gray-900 shadow-lg outline-none backdrop-blur-md transition-all duration-300 placeholder:text-gray-400 focus:-translate-y-0.5 focus:border-purple-400 focus:ring-4 focus:ring-purple-100 focus:shadow-xl" />
+              className={`w-full rounded-2xl border px-5 py-4 pr-12 shadow-lg outline-none backdrop-blur-md transition-all duration-300 placeholder:text-gray-400 focus:-translate-y-0.5 focus:ring-4 ${
+                darkMode ? "border-slate-700 bg-slate-900/80 text-white focus:border-purple-500 focus:ring-purple-900/40" : "border-white/40 bg-white/70 text-gray-900 focus:border-purple-400 focus:ring-purple-100"
+              }`}/>
               
               {search && (
                 <button onClick={() => setSearch("")}
@@ -195,29 +229,35 @@ function App() {
               )}
           </div>
 
-          <div className="mt-8 flex justify-center gap-2 rounded-2xl border border-white/40 bg-white/60 p-2 shadow-lg backdrop-blur-md">
+          <div className={`mt-8 flex justify-center gap-2 rounded-2xl border p-2 shadow-lg backdrop-blur-md transition-all duration-500 ${
+            darkMode ? "border-slate-700/50 bg-slate-900/80" : "border-white/40 bg-white/60"
+          }`}>
             <button onClick={() =>
               setFilter("all")}
-              className={`rounded-xl px-5 py-2.5 text-sm font-semibold transition-all ${filter === "all" ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-purple-200" : "text-gray-600 hover:bg-gray-100"}`}
+              className={`rounded-xl px-5 py-2.5 text-sm font-semibold transition-all ${filter === "all" ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md" : darkMode ? "text-gray-300 hover:bg-slate-800" : "text-gray-600 hover:bg-gray-100"}`}
             >All</button>
 
             <button onClick={() =>
               setFilter("active")}
-              className={`rounded-xl px-5 py-2.5 text-sm font-semibold transition-all ${filter === "active" ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-purple-200" : "text-gray-600 hover:bg-gray-100"
+              className={`rounded-xl px-5 py-2.5 text-sm font-semibold transition-all ${filter === "active" ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md" : darkMode ? "text-gray-300 hover:bg-slate-800" : "text-gray-600 hover:bg-gray-100"
                 }`}>Active</button>
 
             <button onClick={() =>
               setFilter("completed")}
-              className={`rounded-xl px-5 py-2.5 text-sm font-semibold transition-all ${filter === "completed" ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-purple-200" : "text-gray-600 hover:bg-gray-100"
+              className={`rounded-xl px-5 py-2.5 text-sm font-semibold transition-all ${filter === "completed" ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md" : darkMode ? "text-gray-300 hover:bg-slate-800" : "text-gray-600 hover:bg-gray-100"
                 }`}>Completed </button>
           </div>
 
           <div className="mb-4 mt-8 flex items-center justify-between">
             <div >
-            <h2 className="text-xl font-bold text-gray-900">
+            <h2 className={`text-xl font-bold transition-colors duration-500 ${
+              darkMode ? "text-gray-700" : "text-gray-900"
+            }`}>
                Your Tasks
             </h2>
-            <p className="mt-1 text-sm text-gray-500">
+            <p className={`mt-1 text-sm transition-colors duration-500 ${
+              darkMode ? "text-gray-500" : "text-gray-500"
+            }`}>
               Stay organized and keep moving forward.
             </p>
             </div>
@@ -232,6 +272,7 @@ function App() {
             onToggleTask={handleToggleTask}
             onDeleteTask={handleDeleteTask}
             onEditTask={handleEditTask}
+            darkMode={darkMode}
           />
 
         </div>

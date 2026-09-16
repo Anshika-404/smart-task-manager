@@ -4,38 +4,46 @@ import type { NewTask } from "../types/task";
 type TaskInputProps = {
     title: string;
     onAddTask: (task: NewTask) => void;
+    darkMode: boolean;
 };
-function TaskInput({title, onAddTask}: TaskInputProps) {
+function TaskInput({title, onAddTask, darkMode}: TaskInputProps) {
     const [taskText, setTaskText] = useState("");
     const [priority, setPriority] = useState("medium");
 
     return (
-        <div className="relative overflow-hidden rounded-3xl border border-purple-200 bg-white p-7 shadow-2xl shadow-purple-200/60">
+        <div className={`relative overflow-hidden rounded-3xl border p-7 shadow-2xl transition-all duration-500 ${
+            darkMode ? "border-purple-800/50 bg-slate-900 shadow-purple-950/40" : "border-purple-200 bg-white shadow-purple-200/60"}`}
+            >
           <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-purple-100 blur-3xl"></div>
             <div className="mb-6 flex items-center gap">
             <div className="mb-6" >
-                <h2 className="text-xl font-extrabold tracking-tight text-gray-900">{title}</h2>
+                <h2 className={`text-xl font-extrabold tracking-tight transition-colors duration-500 ${
+                    darkMode ? "text-white" : "text-gray-900"}`}
+                    >{title}</h2>
 
                 <div className="mt-2 h-1 w-10 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500"></div>
-                <p className="mt-0.5 text-xs font-medium text-gray-400">What do you want to accomplish?</p>
+                <p className={`mt-2 text-sm font-medium transition-colors duration-500 ${
+                    darkMode ? "text-gray-400" : "text-gray-400" }`}
+                    >What do you want to accomplish?</p>
             </div>
             </div>
-
 
             <input
             type="text"
             placeholder="Enter your task"
             onChange={(event) => setTaskText(event.target.value)}
-            className="w-full rounded-2xl border border-gray-200 bg-gray-50/80 px-5 py-4 text-gray-900 shadow-sm outline-none transition-all duration-300 placeholder:text-gray-400
-             focus:-translate-y-0.5 focus:border-purple-400 focus:bg-white focus:ring-4 focus:ring-purple-100 focus:shadow-lg"
-            />
+            className={`w-full rounded-2xl border px-5 py-4 text-gray-900 shadow-sm outline-none transition-all duration-300 placeholder:text-gray-400 focus:-translate-y-0.5 focus:ring-4 ${
+                darkMode ? "border-slate-700 bg-slate-800 text-white focus:border-purple-500 focus:ring-purple-900/40" : "border-gray-200 bg-gray-50/80 focus:border-purple-400 focus:bg-white focus:ring-purple-100"
+             }`}/>
             
-
-            <label className="mt-4 mb-2 block text-sm font-semibold text-gray-700">Priority</label>
+            <label className={`mt-4 mb-2 block text-sm font-semibold transition-colors duration-500 ${
+                darkMode ? "text-gray-300" : "text-gray-700"}`}
+                >Priority</label>
             <select 
                 value={priority} 
                 onChange={(event) => setPriority(event.target.value)}
-                className="mt-4 w-full cursor-pointer appearance-none rounded-2xl border border-gray-200 bg-gray-50/80 px-5 py-4 text-gray-700 shadow-sm outline-none transition-all duration-300 hover:border-purple-300 focus:-translate-y-0.5 focus:border-purple-400 focus:bg-white focus:ring-4 focus:ring-purple-100 focus:shadow-lg"
+                className={`mt-4 w-full cursor-pointer appearance-none rounded-2xl border px-5 py-4 shadow-sm outline-none transition-all duration-300 focus:-translate-y-0.5 focus:ring-4 ${
+                    darkMode ? "border-slate-700 bg-slate-800 text-white focus:border-purple-500 focus:ring-purple-900/40" : "border-gray-200 bg-gray-50/80 text-gray-700 hover:border-purple-300 focus:border-purple-400 focus:bg-white focus:ring-purple-100"}`}
                 >
                 <option value="low">Low</option>
                 <option value="medium">Medium</option>

@@ -10,13 +10,14 @@ type TaskItemProps = {
         updatedText: string,
         updatedPriority: Task["priority"]
     ) => void;
+    darkMode: boolean;
 };
 
 function TaskItem({
     task,
     onToggleTask,
     onDeleteTask,
-    onEditTask
+    onEditTask, darkMode
 }: TaskItemProps) {
 
     const [isEditing, setIsEditing] = useState(false);
@@ -32,9 +33,9 @@ function TaskItem({
     };
 
     return (
-        <div className={`group relative mb-4 overflow-hidden rounded-2xl border border-white/40 bg-white/70 p-5 shadow-lg backdrop-blur-md transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl ${
-            task.priority === "high" ? "before:bg-red-500" : task.priority === "medium" ? "before:bg-yellow-500" : "before:bg-green-500"
-        } before:absolute before:left-0 before:top-0 before:h-full before:w-1
+        <div className={`group relative mb-4 overflow-hidden rounded-2xl border p-5 shadow-lg backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${
+            darkMode ? "border-slate-700/50 bg-slate-900/80" : "border-white/40 bg-white/70" } ${ task.priority === "high" ? "before:bg-red-500" : task.priority === "medium" ? "before:bg-yellow-500" : "before:bg-green-500"}
+         before:absolute before:left-0 before:top-0 before:h-full before:w-1
         `}>
             {isEditing ? (
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -76,7 +77,7 @@ function TaskItem({
                     />
 
                     <div className="flex-1">
-                        <p className={`text-lg font-semibold transition-all duration-300 ${task.completed ? "text-gray-400 line-through opacity-60" : "text-gray-900"
+                        <p className={`text-lg font-semibold transition-all duration-300 ${task.completed ? "text-gray-400 line-through opacity-60" : darkMode ? "text-gray-200" : "text-gray-900"
                             }`}>{task.text}</p>
 
                         <span className={`mt-2 inline-block rounded-full px-3 py-1 text-xs font-semibold capitalize ${task.priority === "high" ? "bg-red-100 text-red-700" : task.priority === "medium" ? "bg-yellow-100 text-yellow-700" : "bg-green-100 text-green-700"
@@ -90,7 +91,9 @@ function TaskItem({
                             onClick={() =>
                                 onDeleteTask(task.id)} 
                             title="Delete task"
-                            className="flex h-9 w-9 items-center justify-center rounded-xl text-red-500 transition-all duration-200 hover:bg-red-50 hover:text-red-600 hover:scale-110" 
+                            className={`flex h-9 w-9 items-center justify-center rounded-xl text-red-500 transition-all duration-200 hover:scale-110 ${
+                                darkMode ? "hover:bg-red-950/50" : "hover:bg-red-50 hover:text-red-600"
+                            }`} 
                         >
                             🗑️
                         </button>
@@ -99,7 +102,9 @@ function TaskItem({
                             onClick={() =>
                                 setIsEditing(true)} 
                             title="Edit task"
-                            className="flex h-9 w-9 items-center justify-center rounded-xl text-indigo-500 transition-all duration-200 hover:bg-indigo-50 hover:text-indigo-600 hover:scale-110"
+                            className={`flex h-9 w-9 items-center justify-center rounded-xl text-indigo-500 transition-all duration-200 hover:scale-110 ${
+                                darkMode ? "hover:bg-indigo-950/50 hover:text-indigo-400" : "hover:bg-indigo-50 hover:text-indigo-600"
+                            }`}
                         >
                             ✏️
                         </button>
