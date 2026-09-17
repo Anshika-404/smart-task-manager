@@ -19,7 +19,7 @@ function TaskList({ tasks, hasTasks, onToggleTask, onDeleteTask, onEditTask, dar
         <div>
 
             {tasks.length === 0 ? (
-                <div className={`rounded-2xl border border-dashed px-6 py-12 text-center shadow-lg backdrop-blur-md transition-all duration-500 ${
+                <div className={`rounded-2xl border border-dashed px-6 py-12 text-center shadow-lg backdrop-blur-md transition-all duration-500 hover:-translate-y-1 hover:shadow-xl ${
                   darkMode ? "border-purple-800/50 bg-slate-600/50" : "border-purple-200 bg-white/60"
                 }`}>
                     <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-100 to-indigo-100 text-3xl shadow-sm">
@@ -42,8 +42,8 @@ function TaskList({ tasks, hasTasks, onToggleTask, onDeleteTask, onEditTask, dar
                             darkMode ? "text-gray-200" : "text-gray-900"
                         }`} >No tasks yet!</h3>
 
-                    <p className={`mx-auto mt-2 max-w-sm text-sm leading-relaxed ttransition-colors duration-500 ${
-                        darkMode ? "text-gray-900" : "text-gray-500"
+                    <p className={`mx-auto mt-2 max-w-sm text-sm leading-relaxed transition-colors duration-500 ${
+                        darkMode ? "text-gray-300" : "text-gray-500"
                         }`}>Your workspace is waiting. Add your first task and start turning your plans into progress.</p>
 
                     <div className={`mt-5 text-sm font-semibold transition-colors duration-500 ${

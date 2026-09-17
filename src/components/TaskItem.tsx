@@ -44,7 +44,9 @@ function TaskItem({
                         onChange={(event) =>
                             setEditText(event.target.value)
                         } 
-                        className="flex-1 rounded-xl border border-gray-200 bg-white px-4 py-3 text-gray-900 shadow-sm outline-none transition-all placeholder:text-gray-400 focus:border-purple-400 focus:ring-4 focus:ring-purple-100"
+                        className={`flex-1 rounded-xl border px-4 py-3 shadow-sm outline-none transition-all placeholder:text-gray-400 ${
+                            darkMode ? "border-slate-700 bg-slate-800 text-white focus:border-purple-500 focus:ring-4 focus:ring-purple-900/40" : "border-gray-200 bg-white text-gray-900 focus:border-purple-400 focus:ring-4 focus:ring-purple-100"
+                        }`}
                     />
 
                     <select
@@ -54,7 +56,9 @@ function TaskItem({
                                 event.target.value as Task["priority"]
                             )
                         }
-                        className="rounded-xl border border-gray-200 bg-white px-4 py-3 text-gray-700 shadow-sm outline-none transition-all focus:border-purple-400 focus:ring-4 focus:ring-purple-100"
+                        className={`rounded-xl border px-4 py-3 shadow-sm outline-none transition-all ${
+                            darkMode ? "border-slate-700 bg-slate-800 text-white focus:border-purple-500 focus:ring-4 focus:ring-purple-900/40" : "border-gray-200 bg-white text-gray-700 focus:border-purple-400 focus:ring-4 focus:ring-purple-100"
+                        }`}
                     >
                         <option value="low">Low</option>
                         <option value="medium">Medium</option>
@@ -62,7 +66,7 @@ function TaskItem({
                     </select>
 
                     <button onClick={handleSave}
-                    className="rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 px-5 py-3 tetx-sm font-semibold text-white shadow-md shadow-purple-200 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0">
+                    className="rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 px-5 py-3 tetx-sm font-semibold text-white shadow-md shadow-purple-300/40 transition-all duration-200 hover:-translate-y-1 hover:scale-105 hover:shadow-xl hover:shadow-purple-400/30 active:translate-y-0 active:scale-95">
                         Save
                     </button>
                 </div>
@@ -73,14 +77,14 @@ function TaskItem({
                         checked={task.completed}
                         onChange={() =>
                             onToggleTask(task.id)
-                        } className="mt-1 h-5 w-5 cursor-pointer accent-purple-600"
+                        } className="mt-1 h-5 w-5 cursor-pointer accent-purple-600 transition-transform duration-200 hover:scale-110"
                     />
 
                     <div className="flex-1">
                         <p className={`text-lg font-semibold transition-all duration-300 ${task.completed ? "text-gray-400 line-through opacity-60" : darkMode ? "text-gray-200" : "text-gray-900"
                             }`}>{task.text}</p>
 
-                        <span className={`mt-2 inline-block rounded-full px-3 py-1 text-xs font-semibold capitalize ${task.priority === "high" ? "bg-red-100 text-red-700" : task.priority === "medium" ? "bg-yellow-100 text-yellow-700" : "bg-green-100 text-green-700"
+                        <span className={`mt-2 inline-block rounded-full px-3 py-1 text-xs font-semibold capitalize ${task.priority === "high" ? darkMode ? "bg-red-950/60 text-red-400" : "bg-red-100 rwxt-red-700" : task.priority === "medium" ? darkMode ? "bg-yellow-950/60 text-yellow-400" :"bg-yellow-100 text-yellow-700" : darkMode ?  "bg-green-950/60 text-green-400" : "bg-green-100 text-green-700"
                             }`}
                         > {task.priority} priority </span>
 

@@ -30,8 +30,20 @@ function TaskInput({title, onAddTask, darkMode}: TaskInputProps) {
 
             <input
             type="text"
+            value={taskText}
             placeholder="Enter your task"
             onChange={(event) => setTaskText(event.target.value)}
+            onKeyDown={(event) => {
+                if (event.key === "Enter" && taskText.trim()) {
+                    const newTask: NewTask = {
+                        text: taskText,
+                        priority: priority,
+                    };
+                    onAddTask(newTask);
+                    setTaskText("");
+                    setPriority("medium");
+                }
+            }}
             className={`w-full rounded-2xl border px-5 py-4 text-gray-900 shadow-sm outline-none transition-all duration-300 placeholder:text-gray-400 focus:-translate-y-0.5 focus:ring-4 ${
                 darkMode ? "border-slate-700 bg-slate-800 text-white focus:border-purple-500 focus:ring-purple-900/40" : "border-gray-200 bg-gray-50/80 focus:border-purple-400 focus:bg-white focus:ring-purple-100"
              }`}/>
@@ -55,12 +67,14 @@ function TaskInput({title, onAddTask, darkMode}: TaskInputProps) {
                     text: taskText,
                     priority: priority,
                 };
-
                 onAddTask(newTask);
+                setTaskText("");
+                setPriority("medium");
             }} className="mt-4 w-full rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-3.5 font-semibold text-white
                shadow-lg shadow-purple-200 transition-all duration-200 hover:-translate-y-1 hover:scale-[1.01] hover:shadow-xl active:translate-y-0 active:scale-[0.99]">
                 Add Task
             </button>
+
         </div>
     );
 }

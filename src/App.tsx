@@ -14,11 +14,18 @@ function App() {
 
   const [search, setSearch] = useState("");
 
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    const savedTheme = localStorage.getItem("darkMode");
+        return savedTheme === "true";
+  });
 
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
+
+  useEffect(() => {
+    localStorage.setItem("darkMode", String(darkMode));
+  }, [darkMode]);
 
   function handleAddTask(newTask: NewTask) {
     const task: Task = {
@@ -90,7 +97,7 @@ function App() {
             Stay focused • Get things done
           </div>
           
-        <div className="mb=4 flex justify-end">
+        <div className="mb-5 flex justify-end">
           <button onClick={() =>
             setDarkMode(!darkMode)}
             className={`rounded-full border px-4 py-2 text-sm font-semibold shadow-md backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:scale-105 ${
@@ -198,11 +205,17 @@ function App() {
         </div>
 </div>
 
-        <div className="mt-8 rounded-2xl border border-white/40 bg-white/70 p-5 shadow-lg backdrop-blur-md">
+        <div className={`mt-6 rounded-2xl border p-5 shadow-lg backdrop-blur-md transition-all duration-500 ${
+          darkMode ? "border-slate-700/50 bg-slate-900/80" : "border-white/90 bg-white/70"
+        }`}>
           <div className="mb-2 flex items-center justify-between">
-            <p className="text-sm font-semibold text-gray-700"> Your Progress</p>
+            <p className={`text-lg font-bold transition-colors duration-500 ${
+              darkMode ? "text-gray-200" : "text-gray-900"
+            }`}> Your Progress</p>
 
-            <span className="tetx-sm font-bold text-purple-600">{progress}%</span>
+            <span className={`text-sm font-semibold transition-colors duration-500 ${
+              darkMode ? "text-gray-400" : "text-gray-500"
+            }`}>{progress}%</span>
           </div>
         
           <div className="h-3 overflow-hidden rounded-full bg-gray-200">
@@ -251,12 +264,12 @@ function App() {
           <div className="mb-4 mt-8 flex items-center justify-between">
             <div >
             <h2 className={`text-xl font-bold transition-colors duration-500 ${
-              darkMode ? "text-gray-700" : "text-gray-900"
+              darkMode ? "text-gray-500" : "text-gray-900"
             }`}>
                Your Tasks
             </h2>
             <p className={`mt-1 text-sm transition-colors duration-500 ${
-              darkMode ? "text-gray-500" : "text-gray-500"
+              darkMode ? "text-gray-400" : "text-gray-500"
             }`}>
               Stay organized and keep moving forward.
             </p>
