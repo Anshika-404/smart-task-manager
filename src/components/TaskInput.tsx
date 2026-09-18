@@ -9,6 +9,7 @@ type TaskInputProps = {
 function TaskInput({title, onAddTask, darkMode}: TaskInputProps) {
     const [taskText, setTaskText] = useState("");
     const [priority, setPriority] = useState("medium");
+    const [dueDate, setDueDate] = useState("");
 
     return (
         <div className={`relative overflow-hidden rounded-3xl border p-7 shadow-2xl transition-all duration-500 ${
@@ -38,10 +39,12 @@ function TaskInput({title, onAddTask, darkMode}: TaskInputProps) {
                     const newTask: NewTask = {
                         text: taskText,
                         priority: priority,
+                        dueDate: dueDate,
                     };
                     onAddTask(newTask);
                     setTaskText("");
                     setPriority("medium");
+                    setDueDate("");
                 }
             }}
             className={`w-full rounded-2xl border px-5 py-4 text-gray-900 shadow-sm outline-none transition-all duration-300 placeholder:text-gray-400 focus:-translate-y-0.5 focus:ring-4 ${
@@ -62,14 +65,32 @@ function TaskInput({title, onAddTask, darkMode}: TaskInputProps) {
                 <option value="high">High</option>
             </select>
 
+            <label className={`mt-4 mb-2 block text-sm font-semibold ${
+                darkMode ? "text-gray-300" : "text-gry-700"
+            }`}>Due Date</label>
+
+            <input 
+            type="date"
+            value={dueDate}
+            onChange={(event) => setDueDate(event.target.value)}
+            className={`w-full rounded-2xl border px-5 py-4 shadow-sm outline-none transition-all duration-300 focus:-translate-y-0.5 focus:ring-4 ${
+                darkMode ? "border-slate-700 bg-slate-800 text-white focus:border-purple-500 focus:ring-purple-900/40" : "border-gray-200 bg-gray-50/80 text-gray-700 focus:border-purple-400 focus:bg-white focus:ring-purple-100"
+            }`}/>
+
             <button onClick={() => {
+                if (!taskText.trim()) {
+                    return;
+                }
+
                 const newTask: NewTask = {
                     text: taskText,
                     priority: priority,
+                    dueDate: dueDate,
                 };
                 onAddTask(newTask);
                 setTaskText("");
                 setPriority("medium");
+                setDueDate("");
             }} className="mt-4 w-full rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-3.5 font-semibold text-white
                shadow-lg shadow-purple-200 transition-all duration-200 hover:-translate-y-1 hover:scale-[1.01] hover:shadow-xl active:translate-y-0 active:scale-[0.99]">
                 Add Task

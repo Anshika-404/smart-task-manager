@@ -14,6 +14,8 @@ function App() {
 
   const [search, setSearch] = useState("");
 
+  const [smartSort, setSmartSort] = useState(false);
+
   const [darkMode, setDarkMode] = useState(() => {
     const savedTheme = localStorage.getItem("darkMode");
         return savedTheme === "true";
@@ -33,6 +35,7 @@ function App() {
       text: newTask.text,
       priority: newTask.priority,
       completed: false,
+      dueDate: newTask.dueDate,
     };
     setTasks([...tasks, task]);
   }
@@ -70,7 +73,20 @@ function App() {
     const matchesSearch = task.text.toLowerCase().includes(search.toLowerCase());
 
     return matchesFilter && matchesSearch
-  });
+  }).sort((a,b) => {
+    if (!smartSort) return 0;
+
+    if (a.completed !== b.completed) {
+      return a.completed ? 1 : -1;
+    }
+  
+  const priorityOrder = {
+    high: 1,
+    medium: 2,
+    low: 3,
+  };
+  return priorityOrder[a.priority] - priorityOrder[b.priority];
+});
 
   const completedCount = tasks.filter(
     (task) => task.completed
@@ -259,6 +275,11 @@ function App() {
               setFilter("completed")}
               className={`rounded-xl px-5 py-2.5 text-sm font-semibold transition-all ${filter === "completed" ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md" : darkMode ? "text-gray-300 hover:bg-slate-800" : "text-gray-600 hover:bg-gray-100"
                 }`}>Completed </button>
+
+            <button onClick={() => setSmartSort(!smartSort)}
+              className={`rounded-xl px-4 py-2 text-sm font-semibold transition-all duration-300 ${
+                smartSort ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md" : darkMode ? "text-gray-300 hover:bg-slate-800" : "text-gray-600 hover:bg-gray-100"
+              }`}>✨ Smart Sort </button>
           </div>
 
           <div className="mb-4 mt-8 flex items-center justify-between">

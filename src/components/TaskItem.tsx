@@ -88,6 +88,16 @@ function TaskItem({
                             }`}
                         > {task.priority} priority </span>
 
+                        {task.dueDate && ( <p className={`mt-2 text-sm font-medium ${
+                            darkMode ? "text-gray-400" : "text-gray-500"
+                        }`}>
+                            📆 Due: {" "} {new Date(task.dueDate).toLocaleDateString("en-GB", {
+                                day: "2-digit",
+                                month: "short",
+                                year: "numeric",
+                            })}
+                        </p>)}
+
                     </div>
 
                     <div className="flex shrink-0 gap-2">
