@@ -1,75 +1,138 @@
-# React + TypeScript + Vite
+#  Smart Task Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and responsive task management application built with **React, TypeScript, and Tailwind CSS**. Smart Task Manager helps users organize daily tasks with priorities, due dates, progress tracking, search, filtering, Smart Sort, and persistent local storage.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* ➕ Add new tasks
+* ✏️ Edit existing tasks
+* 🗑️ Delete tasks
+* ✅ Mark tasks as completed
+* 🎯 Set task priorities — Low, Medium, High
+* 📅 Add due dates to tasks
+* 🔴 Automatic overdue status
+* 🟠 Due Today status
+* 🟡 Due Tomorrow status
+* 🔍 Search tasks
+* 🔎 Filter tasks by All, Active, and Completed
+* ✨ Smart Sort based on completion and priority
+* 📊 Task statistics and progress tracking
+* 🌙 Dark / Light mode
+* 💾 Persistent data using LocalStorage
+* ⌨️ Add tasks using the Enter key
+* 🛡️ Empty task validation
+* 🎨 Responsive and modern UI
+* ✨ Smooth hover and transition animations
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* **React**
+* **TypeScript**
+* **Tailwind CSS**
+* **Vite**
+* **LocalStorage**
+* **ESLint**
 
-## Expanding the ESLint configuration
+## 📂 Project Structure
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```text
+smart-task-manager/
+├── src/
+│   ├── components/
+│   │   ├── TaskInput.tsx
+│   │   ├── TaskItem.tsx
+│   │   └── TaskList.tsx
+│   │
+│   ├── types/
+│   │   └── task.ts
+│   │
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── index.css
+│
+├── public/
+├── package.json
+├── vite.config.ts
+└── README.md
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 Getting Started
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 1. Clone the repository
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+git clone <your-repository-url>
 ```
+
+### 2. Navigate to the project
+
+```bash
+cd smart-task-manager
+```
+
+### 3. Install dependencies
+
+```bash
+npm install
+```
+
+### 4. Start the development server
+
+```bash
+npm run dev
+```
+
+Open the local development URL shown in your terminal.
+
+## 💡 How It Works
+
+Tasks are managed using React state and stored in the browser's **LocalStorage**, allowing tasks and theme preferences to remain available even after refreshing the page.
+
+The application also provides Smart Sort, which organizes active tasks according to their priority while keeping completed tasks lower in the list.
+
+Due dates are used to automatically identify tasks as **Overdue**, **Due Today**, or **Due Tomorrow**.
+
+## 📸 Screenshots
+
+### ☀️ Light Mode
+
+![Smart Task Manager - Light Mode](./screenshots/light-mode.png)
+
+### 🌙 Dark Mode
+
+![Smart Task Manager - Dark Mode](./screenshots/dark-mode.png)
+
+### 📋 Task Management
+
+![Smart Task Manager - Task Input](./screenshots/task-input.png)
+
+![Smart Task Manager- Task Card](./screenshots/task-card.png)
+
+## 🎯 Key Learning Outcomes
+
+This project helped me practice:
+
+* React functional components
+* React Hooks and state management
+* TypeScript types and interfaces
+* Component-based architecture
+* Props and event handling
+* Conditional rendering
+* Array methods such as `map()`, `filter()`, and `sort()`
+* LocalStorage
+* Tailwind CSS
+* Responsive UI design
+* Form handling and validation
+* Interactive user experience
+
+## 🔮 Future Improvements
+
+* 🔔 Browser notifications for upcoming deadlines
+* ☁️ Cloud database synchronization
+* 👤 User authentication
+* 📱 PWA / mobile installation support
+* 📈 Advanced productivity analytics
+
+## 👩‍💻 Author
+
+**Anshika Verma**
