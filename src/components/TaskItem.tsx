@@ -32,6 +32,24 @@ function TaskItem({
         setIsEditing(false);
     };
 
+    const getDueDateStatus = () => {
+        if (!task.dueDate) return "";
+
+        const today = new Date();
+        const dueDate = new Date(task.dueDate);
+
+        today.setHours(0, 0, 0, 0);
+        dueDate.setHours(0, 0, 0, 0);
+
+        const difference = dueDate.getTime() - today.getTime();
+        const daysLeft = Math.ceil(difference / (1000 * 60 * 60 * 24));
+
+        if (daysLeft < 0) return "🔴 Overdue";
+        if (daysLeft === 0) return "🟠 Due Today";
+        if (daysLeft === 1) return "🟡 Due Tomorrow";
+        return "";
+    }
+
     return (
         <div className={`group relative mb-4 overflow-hidden rounded-2xl border p-5 shadow-lg backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${
             darkMode ? "border-slate-700/50 bg-slate-900/80" : "border-white/40 bg-white/70" } ${ task.priority === "high" ? "before:bg-red-500" : task.priority === "medium" ? "before:bg-yellow-500" : "before:bg-green-500"}
@@ -88,7 +106,9 @@ function TaskItem({
                             }`}
                         > {task.priority} priority </span>
 
-                        {task.dueDate && ( <p className={`mt-2 text-sm font-medium ${
+                        {task.dueDate && ( 
+                            <div className="mt-2">
+                            <p className={`mt-2 text-sm font-medium ${
                             darkMode ? "text-gray-400" : "text-gray-500"
                         }`}>
                             📆 Due: {" "} {new Date(task.dueDate).toLocaleDateString("en-GB", {
@@ -96,7 +116,17 @@ function TaskItem({
                                 month: "short",
                                 year: "numeric",
                             })}
-                        </p>)}
+                        </p>
+                        { !task.completed && getDueDateStatus() && ( <span className={`mt-2 inline-block rounded-full px-3 py-1 text-xs font-bold ${
+                            getDueDateStatus().includes("Overdue") ? darkMode ? "bg-red-950/60 text-red-400" : "bg-red-100 text-red-700" 
+                            : getDueDateStatus().includes("Today") ? darkMode ? "bg-orange-950/60 text-orange-400" : "bg-orange-100 text-orange-700" : darkMode ? "bg-yellow-950/60 text-yellow-400"
+                            : "bg-yellow-100 text-yellow-700"
+                                                   }`}>
+                            {getDueDateStatus()}
+                        </span>
+                        )}
+                        </div>
+            )}
 
                     </div>
 
