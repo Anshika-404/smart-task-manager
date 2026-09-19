@@ -61,7 +61,7 @@ smart-task-manager/
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/Anshika-404/smart-task-manager
 ```
 
 ### 2. Navigate to the project
