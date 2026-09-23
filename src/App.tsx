@@ -258,7 +258,7 @@ function App() {
               )}
           </div>
 
-          <div className={`mt-8 flex justify-center gap-2 rounded-2xl border p-2 shadow-lg backdrop-blur-md transition-all duration-500 ${
+          <div className={`mt-8 flex flex-wrap justify-center gap-2 rounded-2xl border p-2 shadow-lg backdrop-blur-md transition-all duration-500 ${
             darkMode ? "border-slate-700/50 bg-slate-900/80" : "border-white/40 bg-white/60"
           }`}>
             <button onClick={() =>
